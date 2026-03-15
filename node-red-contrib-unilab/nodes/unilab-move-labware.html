@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-move-labware', {
+    category: 'UniLab操作',
+    color: '#27AE60',
+    defaults: {
+      name:         { value: '' },
+      backend:      { value: '', type: 'unilab-config' },
+      device_id:    { value: '' },
+      mode:         { value: 'execute' },
+      source:       { value: '' },
+      target:       { value: '' },
+      labware_type: { value: '' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-exchange',
+    label: function () { return this.name || '耗材移动'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-move-labware">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="耗材移动">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-cog"></i> 模式</label>
+    <select id="node-input-mode">
+      <option value="execute">立即执行</option>
+      <option value="descriptor">协议描述符</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-device_id"><i class="fa fa-microchip"></i> 设备 ID</label>
+    <input type="text" id="node-input-device_id">
+  </div>
+  <div class="form-row">
+    <label for="node-input-source"><i class="fa fa-sign-out"></i> 来源位置</label>
+    <input type="text" id="node-input-source" placeholder="deck_1">
+  </div>
+  <div class="form-row">
+    <label for="node-input-target"><i class="fa fa-sign-in"></i> 目标位置</label>
+    <input type="text" id="node-input-target" placeholder="deck_2">
+  </div>
+  <div class="form-row">
+    <label for="node-input-labware_type"><i class="fa fa-cube"></i> 耗材类型</label>
+    <input type="text" id="node-input-labware_type" placeholder="96_well_plate">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-move-labware">
+  <p>耗材移动操作节点，对应 UniLab <code>move_labware</code> 动作。</p>
+</script>

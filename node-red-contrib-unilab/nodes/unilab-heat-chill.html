@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-heat-chill', {
+    category: 'UniLab操作',
+    color: '#C0392B',
+    defaults: {
+      name:        { value: '' },
+      backend:     { value: '', type: 'unilab-config' },
+      device_id:   { value: '' },
+      mode:        { value: 'execute' },
+      target_temp: { value: 4 },
+      hold_time:   { value: 0 },
+      ramp_rate:   { value: 1 }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-snowflake-o',
+    label: function () { return this.name || '温控'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-heat-chill">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="温控">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-cog"></i> 模式</label>
+    <select id="node-input-mode">
+      <option value="execute">立即执行</option>
+      <option value="descriptor">协议描述符</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-device_id"><i class="fa fa-microchip"></i> 设备 ID</label>
+    <input type="text" id="node-input-device_id">
+  </div>
+  <div class="form-row">
+    <label for="node-input-target_temp"><i class="fa fa-thermometer"></i> 目标温度 (°C)</label>
+    <input type="number" id="node-input-target_temp">
+  </div>
+  <div class="form-row">
+    <label for="node-input-hold_time"><i class="fa fa-clock-o"></i> 保温时间 (秒)</label>
+    <input type="number" id="node-input-hold_time" min="0">
+  </div>
+  <div class="form-row">
+    <label for="node-input-ramp_rate"><i class="fa fa-line-chart"></i> 升降温速率 (°C/s)</label>
+    <input type="number" id="node-input-ramp_rate" min="0" step="0.1">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-heat-chill">
+  <p>温控操作节点，对应 UniLab <code>heat_chill</code> 动作。</p>
+</script>

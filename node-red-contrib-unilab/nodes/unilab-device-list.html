@@ -1,0 +1,29 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-device-list', {
+    category: 'UniLab',
+    color: '#4DA6FF',
+    defaults: {
+      name:    { value: '' },
+      backend: { value: '', type: 'unilab-config' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-list',
+    label: function () { return this.name || '设备列表'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-device-list">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="设备列表">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-device-list">
+  <p>触发后获取 UniLab 在线设备列表，结果写入 <code>msg.payload</code>。</p>
+</script>

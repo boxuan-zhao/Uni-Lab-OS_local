@@ -178,6 +178,12 @@ def parse_args():
         default=False,
         help="Test mode: all actions simulate execution and return mock results without running real hardware",
     )
+    parser.add_argument(
+        "--local_mode",
+        action="store_true",
+        default=False,
+        help="Local mode: skip cloud authentication and sync, run fully offline",
+    )
     # workflow upload subcommand
     workflow_parser = subparsers.add_parser(
         "workflow_upload",
@@ -358,6 +364,9 @@ def main():
     BasicConfig.test_mode = args_dict.get("test_mode", False)
     if BasicConfig.test_mode:
         print_status("启用测试模式：所有动作将模拟执行，不调用真实硬件", "warning")
+    BasicConfig.local_mode = args_dict.get("local_mode", False)
+    if BasicConfig.local_mode:
+        print_status("启用本地模式：跳过云端验证和同步", "info")
     BasicConfig.communication_protocol = "websocket"
     machine_name = platform.node()
     machine_name = "".join([c if c.isalnum() or c == "_" else "_" for c in machine_name])
@@ -413,7 +422,9 @@ def main():
         print_status("工作流上传完成，程序退出", "info")
         os._exit(0)
 
-    if not BasicConfig.ak or not BasicConfig.sk:
+    if BasicConfig.local_mode:
+        print_status("运行在本地模式，跳过云端验证", "info")
+    elif not BasicConfig.ak or not BasicConfig.sk:
         print_status("后续运行必须拥有一个实验室，请前往 https://uni-lab.bohrium.com 注册实验室！", "warning")
         os._exit(1)
     graph: nx.Graph

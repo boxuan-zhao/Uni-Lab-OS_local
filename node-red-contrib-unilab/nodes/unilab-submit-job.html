@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-submit-job', {
+    category: 'UniLab',
+    color: '#27AE60',
+    defaults: {
+      name:       { value: '' },
+      backend:    { value: '', type: 'unilab-config' },
+      protocolId: { value: '' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-play',
+    label: function () { return this.name || '提交协议'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-submit-job">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="提交协议">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-protocolId"><i class="fa fa-file"></i> 协议 ID</label>
+    <input type="text" id="node-input-protocolId" placeholder="留空则使用 msg.protocolId">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-submit-job">
+  <p>将指定协议转换为 UniLab 任务序列并提交执行。</p>
+  <p>输入消息可通过 <code>msg.protocolId</code> 覆盖节点配置的协议 ID。</p>
+  <p>输出 <code>msg.payload</code> 包含提交结果，<code>msg.jobIds</code> 包含所有任务 ID 数组。</p>
+</script>

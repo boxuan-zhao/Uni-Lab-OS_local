@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-job-status', {
+    category: 'UniLab',
+    color: '#F39C12',
+    defaults: {
+      name:         { value: '' },
+      backend:      { value: '', type: 'unilab-config' },
+      jobId:        { value: '' },
+      pollInterval: { value: 5, validate: RED.validators.number() }
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['成功', '失败'],
+    icon: 'font-awesome/fa-tasks',
+    label: function () { return this.name || '任务状态'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-job-status">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="任务状态">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-jobId"><i class="fa fa-id-badge"></i> 任务 ID</label>
+    <input type="text" id="node-input-jobId" placeholder="留空则使用 msg.jobId 或 msg.jobIds">
+  </div>
+  <div class="form-row">
+    <label for="node-input-pollInterval"><i class="fa fa-clock-o"></i> 轮询间隔 (秒)</label>
+    <input type="number" id="node-input-pollInterval" min="1" placeholder="5">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-job-status">
+  <p>定期轮询任务状态直到终止。</p>
+  <p>输出1（成功），输出2（失败/取消）。</p>
+  <p>支持 <code>msg.jobId</code>（单个）或 <code>msg.jobIds</code>（数组）。</p>
+</script>

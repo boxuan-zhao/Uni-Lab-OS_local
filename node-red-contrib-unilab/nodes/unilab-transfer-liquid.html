@@ -1,0 +1,74 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-transfer-liquid', {
+    category: 'UniLab操作',
+    color: '#3498DB',
+    defaults: {
+      name:        { value: '' },
+      backend:     { value: '', type: 'unilab-config' },
+      device_id:   { value: '' },
+      mode:        { value: 'execute' },
+      asp_vol:     { value: 0 },
+      dis_vol:     { value: 0 },
+      sources:     { value: '' },
+      targets:     { value: '' },
+      liquid_class:{ value: '' },
+      mix_cycles:  { value: 0 }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-tint',
+    label: function () { return this.name || '液体转移'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-transfer-liquid">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="液体转移">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-cog"></i> 模式</label>
+    <select id="node-input-mode">
+      <option value="execute">立即执行</option>
+      <option value="descriptor">协议描述符</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-device_id"><i class="fa fa-microchip"></i> 设备 ID</label>
+    <input type="text" id="node-input-device_id">
+  </div>
+  <div class="form-row">
+    <label for="node-input-asp_vol"><i class="fa fa-arrow-up"></i> 吸液量 (µL)</label>
+    <input type="number" id="node-input-asp_vol" min="0">
+  </div>
+  <div class="form-row">
+    <label for="node-input-dis_vol"><i class="fa fa-arrow-down"></i> 分液量 (µL)</label>
+    <input type="number" id="node-input-dis_vol" min="0">
+  </div>
+  <div class="form-row">
+    <label for="node-input-sources"><i class="fa fa-sign-out"></i> 来源孔位</label>
+    <input type="text" id="node-input-sources" placeholder="A1,A2,...">
+  </div>
+  <div class="form-row">
+    <label for="node-input-targets"><i class="fa fa-sign-in"></i> 目标孔位</label>
+    <input type="text" id="node-input-targets" placeholder="B1,B2,...">
+  </div>
+  <div class="form-row">
+    <label for="node-input-liquid_class"><i class="fa fa-flask"></i> 液体类型</label>
+    <input type="text" id="node-input-liquid_class">
+  </div>
+  <div class="form-row">
+    <label for="node-input-mix_cycles"><i class="fa fa-refresh"></i> 混合次数</label>
+    <input type="number" id="node-input-mix_cycles" min="0">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-transfer-liquid">
+  <p>液体转移操作节点，对应 UniLab <code>transfer_liquid</code> 动作。</p>
+  <p><b>立即执行</b>：收到消息后立即提交单个任务到 UniLab。</p>
+  <p><b>协议描述符</b>：将节点参数打包为 <code>msg.payload</code> 传递给下游（用于协议流程）。</p>
+</script>

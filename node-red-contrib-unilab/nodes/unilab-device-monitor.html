@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-device-monitor', {
+    category: 'UniLab',
+    color: '#8E44AD',
+    defaults: {
+      name:    { value: '' },
+      backend: { value: '', type: 'unilab-config' }
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: 'font-awesome/fa-heartbeat',
+    label: function () { return this.name || '设备监控'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-device-monitor">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="设备监控">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-device-monitor">
+  <p>通过 WebSocket 实时接收设备状态，每次推送时向下游发送消息。</p>
+  <p><code>msg.payload</code> 包含设备状态 JSON，<code>msg.topic</code> 为 <code>"device-status"</code>。</p>
+</script>

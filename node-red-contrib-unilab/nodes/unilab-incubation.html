@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-incubation', {
+    category: 'UniLab操作',
+    color: '#E67E22',
+    defaults: {
+      name:          { value: '' },
+      backend:       { value: '', type: 'unilab-config' },
+      device_id:     { value: '' },
+      mode:          { value: 'execute' },
+      duration:      { value: 3600 },
+      temperature:   { value: 37 },
+      shaking_speed: { value: 0 }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/fa-thermometer-half',
+    label: function () { return this.name || '孵育'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-incubation">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-input-name" placeholder="孵育">
+  </div>
+  <div class="form-row">
+    <label for="node-input-backend"><i class="fa fa-server"></i> 后端</label>
+    <input type="text" id="node-input-backend">
+  </div>
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-cog"></i> 模式</label>
+    <select id="node-input-mode">
+      <option value="execute">立即执行</option>
+      <option value="descriptor">协议描述符</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-device_id"><i class="fa fa-microchip"></i> 设备 ID</label>
+    <input type="text" id="node-input-device_id">
+  </div>
+  <div class="form-row">
+    <label for="node-input-duration"><i class="fa fa-clock-o"></i> 持续时间 (秒)</label>
+    <input type="number" id="node-input-duration" min="0">
+  </div>
+  <div class="form-row">
+    <label for="node-input-temperature"><i class="fa fa-thermometer-half"></i> 温度 (°C)</label>
+    <input type="number" id="node-input-temperature">
+  </div>
+  <div class="form-row">
+    <label for="node-input-shaking_speed"><i class="fa fa-refresh"></i> 振荡速度 (rpm)</label>
+    <input type="number" id="node-input-shaking_speed" min="0">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-incubation">
+  <p>孵育操作节点，对应 UniLab <code>incubation</code> 动作。</p>
+</script>

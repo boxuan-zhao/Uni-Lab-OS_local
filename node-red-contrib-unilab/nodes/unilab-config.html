@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('unilab-config', {
+    category: 'config',
+    defaults: {
+      name: { value: 'UniLab Backend' },
+      url:  { value: 'http://localhost:3000' }
+    },
+    label: function () { return this.name || 'UniLab Backend'; }
+  });
+</script>
+
+<script type="text/html" data-template-name="unilab-config">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> 名称</label>
+    <input type="text" id="node-config-input-name" placeholder="UniLab Backend">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-url"><i class="fa fa-globe"></i> 后端 URL</label>
+    <input type="text" id="node-config-input-url" placeholder="http://localhost:3000">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="unilab-config">
+  <p>UniLab 后端连接配置节点。</p>
+  <p><b>后端 URL</b>：Python FastAPI 中间层地址（默认 http://localhost:3000）。</p>
+</script>
